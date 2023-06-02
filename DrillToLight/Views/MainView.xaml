@@ -39,7 +39,8 @@
 
                 <!-- Chemin du fichier original -->
                 <StackPanel Grid.Column="0" Grid.Row="1">
-                    <TextBlock Text="{Binding CheminFichierOriginal}" />
+                <TextBlock Text="Source Coppercam"/>
+                <TextBlock Text="{Binding CheminFichierOriginal}" />
                 </StackPanel>
 
             <!-- Affichage du gcode original-->
@@ -72,7 +73,8 @@
 
                 <!-- Chemin du fichier modifié -->
                 <StackPanel Grid.Column="3" Grid.Row="1">
-                    <TextBlock Text="{Binding CheminNomNouveauFichier}" />
+                <TextBlock Text="Déstination LaserGrbl"/>
+                <TextBlock Text="{Binding CheminNomNouveauFichier}" />
                 </StackPanel>
 
                 <!-- Affichage du gcode modifié -->

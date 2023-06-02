@@ -60,6 +60,7 @@ namespace DrillToLight.ViewModels
             _Lecture = lecture;
             _conversion = conversion;
             _enregistrement = enregistrement;
+            
         }
     }
 }
