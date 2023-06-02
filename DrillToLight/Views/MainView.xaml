@@ -8,16 +8,14 @@
         xmlns:conv="clr-namespace:DrillToLight.Convertisseurs"
         d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
         mc:Ignorable="d"
-       Title="Conversion gcode" Height="700" Width="900" WindowStartupLocation="CenterScreen">
+        Title="Conversion gcode" Height="700" Width="900" 
+        WindowStartupLocation="CenterScreen">
     
-    
-    
+        
     <Window.Resources>
         <conv:ColorConverter x:Key="Couleur"/>
         <conv:VisibleConverter x:Key="visible"/>
     </Window.Resources>
-
-
 
         <Grid Margin="10">
 

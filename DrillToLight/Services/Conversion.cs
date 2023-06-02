@@ -5,7 +5,6 @@ namespace DrillToLight.Services
 {
     internal class Conversion : IConversion
     {
-        // Création d'une nouvelle collection sinon les modifications portent aussi sur GcodeOriginal
         ObservableCollection<string>? conversion;
         public ObservableCollection<string> GetConvertir(ObservableCollection<string> gcodeDrill)
         {
