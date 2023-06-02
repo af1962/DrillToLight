@@ -1,6 +1,5 @@
 ﻿using DrillToLight.Interfaces;
 using System.Collections.ObjectModel;
-using System.Diagnostics.Eventing.Reader;
 
 namespace DrillToLight.Services
 {
@@ -28,7 +27,7 @@ namespace DrillToLight.Services
                 if (gcodeDrill[i].Contains("Z2"))
                 {
                     conversion.Add("M03 S0");
-                }                           
+                }
             }
 
             conversion.Add("M03 S0");
