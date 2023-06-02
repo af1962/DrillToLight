@@ -1,12 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DrillToLight.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DrillToLight.ViewModels
 {
@@ -15,7 +10,7 @@ namespace DrillToLight.ViewModels
         // Chemin du nouveau fichier
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(BtnEnregistrer))]
-        private string cheminNomNouveauFichier;        
+        private string cheminNomNouveauFichier;
 
         // Chemin du fichier original
         [ObservableProperty]
@@ -31,7 +26,7 @@ namespace DrillToLight.ViewModels
 
         // Commande Bouton Parcourir
         private RelayCommand btnParcourir;
-        public RelayCommand BtnParcourir => btnParcourir ?? (btnParcourir = new RelayCommand(() => { ExecuteParcourir(); }));
+        public RelayCommand BtnParcourir => btnParcourir ??= new RelayCommand(() => { ExecuteParcourir(); });
 
         // Affichage des gcodes dans les listBox
         public void ExecuteParcourir()
@@ -44,13 +39,7 @@ namespace DrillToLight.ViewModels
 
         // Commande Bouton Enregistrer
         private RelayCommand btnEnregistrer;
-        public RelayCommand BtnEnregistrer
-        {
-            get
-            {
-                return btnEnregistrer ?? (btnEnregistrer = new RelayCommand(ExecuteEnregistrer, () => !string.IsNullOrEmpty(CheminNomNouveauFichier)));
-            }
-        }
+        public RelayCommand BtnEnregistrer => btnEnregistrer ??= new RelayCommand(ExecuteEnregistrer, () => !string.IsNullOrEmpty(CheminNomNouveauFichier));
 
         // Commande d'enregistrement du gcode modifié
         public void ExecuteEnregistrer()

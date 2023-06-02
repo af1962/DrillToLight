@@ -17,7 +17,7 @@
         <conv:VisibleConverter x:Key="visible"/>
     </Window.Resources>
 
-    <Grid>        
+    <Grid Margin="10">        
 
         <Grid>
             <Grid.ColumnDefinitions>
@@ -39,7 +39,7 @@
 
             <!-- Chemin du fichier original -->
             <StackPanel Grid.Column="0" Grid.Row="1">
-                <Label Content="{Binding CheminFichierOriginal}"/>
+                <TextBlock Text="{Binding CheminFichierOriginal}" />
             </StackPanel>
 
             <!-- Affichage du gcode original-->
@@ -80,9 +80,7 @@
 
             <!-- Affichage du gcode modifié -->
             <ScrollViewer Grid.Column="3" Grid.Row="2">
-                <StackPanel >
-                    <ListBox ItemsSource="{Binding GcodeModif}"/>
-                </StackPanel>
+                <ListBox ItemsSource="{Binding GcodeModif}"/>                    
             </ScrollViewer>
         </Grid>
 
