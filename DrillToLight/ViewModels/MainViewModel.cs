@@ -13,46 +13,25 @@ namespace DrillToLight.ViewModels
     internal partial class MainViewModel : ObservableObject
     {
         // Chemin du nouveau fichier
-        private string cheminNouveauFichier;
-        public string CheminNomNouveauFichier
-        {
-            get => cheminNouveauFichier;
-            set
-            {
-                if (SetProperty(ref cheminNouveauFichier, value))
-                {
-                    BtnEnregistrer.NotifyCanExecuteChanged();
-                }
-            }
-        }
+        [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(BtnEnregistrer))]
+        private string cheminNomNouveauFichier;        
 
         // Chemin du fichier original
+        [ObservableProperty]
         private string cheminFichierOriginal;
-        public string CheminFichierOriginal
-        {
-            get => cheminFichierOriginal;
-            set => SetProperty(ref cheminFichierOriginal, value);
-        }
 
         // Gcode original
+        [ObservableProperty]
         ObservableCollection<string> gcodeOriginal;
-        public ObservableCollection<string> GcodeOriginal
-        {
-            get => gcodeOriginal;
-            set => SetProperty(ref gcodeOriginal, value);
-        }
 
         // Gcode modifié
+        [ObservableProperty]
         ObservableCollection<string> gcodeModif;
-        public ObservableCollection<string> GcodeModif
-        {
-            get => gcodeModif;
-            set => SetProperty(ref gcodeModif, value);
-        }
 
         // Commande Bouton Parcourir
-        private RelayCommand? btnParcourir;
-        public RelayCommand? BtnParcourir => btnParcourir ?? (btnParcourir = new RelayCommand(() => { ExecuteParcourir(); }));
+        private RelayCommand btnParcourir;
+        public RelayCommand BtnParcourir => btnParcourir ?? (btnParcourir = new RelayCommand(() => { ExecuteParcourir(); }));
 
         // Affichage des gcodes dans les listBox
         public void ExecuteParcourir()
@@ -62,7 +41,6 @@ namespace DrillToLight.ViewModels
             GcodeModif = _conversion.GetConvertir(GcodeOriginal);
             CheminNomNouveauFichier = CheminFichierOriginal.Insert(CheminFichierOriginal.Length - 3, "-Laser");
         }
-
 
         // Commande Bouton Enregistrer
         private RelayCommand btnEnregistrer;
