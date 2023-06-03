@@ -74,6 +74,7 @@ namespace DrillToLight.ViewModels
             Analyse();
         }
 
+        // Bouton modification
         private RelayCommand btnModificationCode;
         public RelayCommand BtnModificationCode => btnModificationCode ?? new RelayCommand(() => { ExecuteModificationCode(); });
     
