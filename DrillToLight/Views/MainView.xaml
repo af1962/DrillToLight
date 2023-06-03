@@ -10,87 +10,131 @@
         mc:Ignorable="d"
         Title="Conversion gcode" Height="700" Width="900" 
         WindowStartupLocation="CenterScreen">
-    
-        
+
+
     <Window.Resources>
         <conv:ColorConverter x:Key="Couleur"/>
         <conv:VisibleConverter x:Key="visible"/>
     </Window.Resources>
 
-        <Grid Margin="10">
+    <Grid Margin="10">
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="280"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="280"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-                <!-- Bouton parcourir-->
-                <StackPanel Grid.Column="0" Grid.Row="0">
-                    <Button Content="Parcourir" Width="100" Height="30" Margin="5" Style="{StaticResource btnStyle}"
+            <!-- Bouton parcourir-->
+            <StackPanel Grid.Column="0" Grid.Row="0">
+                <Button Content="Parcourir" Width="100" Height="30" Margin="5" Style="{StaticResource btnStyle}"
                     Command="{Binding BtnParcourir}" />
-                </StackPanel>
+            </StackPanel>
 
-                <!-- Chemin du fichier original -->
-                <StackPanel Grid.Column="0" Grid.Row="1">
+            <!-- Chemin du fichier original -->
+            <StackPanel Grid.Column="0" Grid.Row="1">
                 <TextBlock Text="Source Coppercam"/>
                 <TextBlock Text="{Binding CheminFichierOriginal}" />
-                </StackPanel>
+            </StackPanel>
 
             <!-- Affichage du gcode original-->
-                <ScrollViewer Grid.Row="2" Grid.Column="0">                   
-                    <ListBox x:Name="lstFichier" ItemsSource="{Binding GcodeOriginal}">
-                        <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel>
-                                        <TextBlock Text="{Binding}" Foreground="{Binding Converter={StaticResource Couleur}}"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>                    
-                </ScrollViewer>
-
-                <!-- Renseignements -->
-                <StackPanel Grid.Column="1" Grid.Row="2" Margin="10,200" 
-                    Visibility="{Binding CheminNomNouveauFichier,Converter={StaticResource visible}}" >
-                    <TextBlock Text="G00 Z2 -> M03 S0 :" FontWeight="DemiBold"/>
-                    <TextBlock Text="Tête en haut -> Arrêt du faisceau" Margin="0,0,0,5"/>
-                    <TextBlock Text="G00 Z0 -> M03 S1000:" FontWeight="DemiBold" />
-                    <TextBlock Text="Tête en bas -> activation du faisceau" />
-                </StackPanel>
-
-                <!-- Bouton enregistrement -->
-                <StackPanel Grid.Column="3" Grid.Row="0">
-                    <Button Content="Enregistrer" Width="100" Height="30" Margin="5" Style="{StaticResource btnStyle}"
-                    Command="{Binding BtnEnregistrer}"/>
-                </StackPanel>
-
-                <!-- Chemin du fichier modifié -->
-                <StackPanel Grid.Column="3" Grid.Row="1">
-                <TextBlock Text="Déstination LaserGrbl"/>
-                <TextBlock Text="{Binding CheminNomNouveauFichier}" />
-                </StackPanel>
-
-                <!-- Affichage du gcode modifié -->
-                <ScrollViewer Grid.Column="2" Grid.Row="2">
-                <ListBox ItemsSource="{Binding GcodeModif}" >
+            <ScrollViewer Grid.Row="2" Grid.Column="0">
+                <ListBox x:Name="lstFichier" ItemsSource="{Binding GcodeOriginal}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBlock Text="{Binding}" />
+                                <TextBlock Text="{Binding}"/>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
             </ScrollViewer>
-            </Grid>
 
+            <!-- ProgressBar -->
+            <StackPanel Grid.Column="1" Grid.Row="1" Margin="10"
+                        Visibility="{Binding InfoChargement,Converter={StaticResource visible}}">
+                <TextBlock Text="Traitement en cours ..." HorizontalAlignment="Center" FontWeight="Bold"/>
+            </StackPanel>
+
+            <!-- Renseignements -->
+            <StackPanel Grid.Column="1" Grid.Row="2" Margin="10,20">
+                <StackPanel>
+                    <TextBlock Text="G00 Z2 -> M03 S0 :" FontWeight="DemiBold"/>
+                    <TextBlock Text="Tête en haut -> Arrêt du faisceau" Margin="0,0,0,5"/>
+                    <TextBlock Text="G00 Z0 -> M03 S1000:" FontWeight="DemiBold" />
+                    <TextBlock Text="Tête en bas -> Faisceau 100%" />
+                </StackPanel>
+
+
+                <StackPanel Background="Beige" Margin="0,40">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.ColumnSpan="2" Grid.Row="0">
+                            <TextBlock Text="Ajustement" HorizontalAlignment="Center" FontWeight="Bold" FontSize="14"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="0" Grid.Row="1">
+                            <TextBlock Text="Valeur actuelle" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding PowerCurrent}" Foreground="Red" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding SpeedCurrent}" Foreground="Blue" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center">
+                            <TextBlock Text="Nouvelle valeur" HorizontalAlignment="Center"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="S : "/>
+                                <TextBox Text="{Binding PowerNew}" Width="80"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="F : "/>
+                                <TextBox Text="{Binding SpeedNew}" Width="80"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Grid.ColumnSpan="2" Grid.Row="2" Margin="0,20">
+                            <Button Content="Valider" Command="{Binding BtnModificationCode}" Width="100" Style="{StaticResource btnStyle}"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Bouton enregistrement -->
+            <StackPanel Grid.Column="3" Grid.Row="0">
+                <Button Content="Enregistrer" Width="100" Height="30" Margin="5" Style="{StaticResource btnStyle}"
+                    Command="{Binding BtnEnregistrer}"/>
+            </StackPanel>
+
+            <!-- Chemin du fichier modifié -->
+            <StackPanel Grid.Column="3" Grid.Row="1">
+                <TextBlock Text="Déstination LaserGrbl"/>
+                <TextBlock Text="{Binding CheminNomNouveauFichier}" />
+            </StackPanel>
+
+            <!-- Affichage du gcode modifié -->
+            <ScrollViewer Grid.Column="2" Grid.Row="2">
+                <ListBox ItemsSource="{Binding GcodeModif}" >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding}" Foreground="{Binding Converter={StaticResource Couleur}}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
         </Grid>
-    
+
+    </Grid>
+
 </Window>

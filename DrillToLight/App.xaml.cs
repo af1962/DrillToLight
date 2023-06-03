@@ -41,6 +41,7 @@ namespace DrillToLight
             services.AddSingleton<ILecture, Lecture>();
             services.AddSingleton<IConversion, Conversion>();
             services.AddSingleton<IEnregistrement, Enregistrement>();
+            services.AddScoped<IModificationCode, ModificationCode>();
 
 
             // Viewmodels

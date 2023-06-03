@@ -14,18 +14,15 @@ namespace DrillToLight.Convertisseurs
         {
             string ligne = (string)value;
 
-            if (ligne.Contains("Z-") || ligne.Contains("(") || ligne.Contains("%") || ligne.Contains("M") || ligne.Contains("G21") || ligne.Contains("80"))
-            {
-                return "gray";
-            }
-            if (ligne.Contains("G00 Z"))
+            if (ligne.Contains("F"))
             {
                 return "blue";
             }
-            else
+            if(ligne.Contains("S"))
             {
-                return "black";
+                return "red";
             }
+            return "black";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

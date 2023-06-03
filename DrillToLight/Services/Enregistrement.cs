@@ -8,16 +8,16 @@ namespace DrillToLight.Services
     {
         void IEnregistrement.Enregistrement(ObservableCollection<string> collection, string chemin)
         {
-            StreamWriter ecrire = new StreamWriter(File.Create(chemin));
-            for (int i = 0; i < collection.Count; i++)
+            using (StreamWriter ecrire = new StreamWriter(chemin))
             {
+                for (int i = 0; i < collection.Count; i++)
                 {
-                    ecrire.WriteLine(collection[i]);
+                    {
+                        ecrire.WriteLine(collection[i]);
+                    }
                 }
+                ecrire.Close();
             }
-
-            ecrire.Close();
-
         }
     }
 }
