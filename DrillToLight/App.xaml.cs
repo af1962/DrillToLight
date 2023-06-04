@@ -1,9 +1,7 @@
-﻿using DrillToLight.Interfaces;
-using DrillToLight.Services;
+﻿using DrillToLight.Services;
 using DrillToLight.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Windows;
 
 namespace DrillToLight
 {

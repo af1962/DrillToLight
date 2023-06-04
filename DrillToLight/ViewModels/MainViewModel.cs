@@ -1,12 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using DrillToLight.Interfaces;
-using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Threading;
+﻿using CommunityToolkit.Mvvm.Input;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace DrillToLight.ViewModels
 {

@@ -1,8 +1,4 @@
-﻿using DrillToLight.Interfaces;
-using System.Collections.ObjectModel;
-using System.IO;
-
-namespace DrillToLight.Services
+﻿namespace DrillToLight.Services
 {
     internal class Enregistrement : IEnregistrement
     {
