@@ -49,12 +49,16 @@ namespace DrillToLight.ViewModels
         private string? infoChargement = null;
 
         // Commande Bouton Parcourir
-        private AsyncRelayCommand? btnParcourir;
-        public AsyncRelayCommand? BtnParcourir
+        private RelayCommand? btnParcourir;
+        public RelayCommand? BtnParcourir
         {
             get
             {
-                return btnParcourir ?? (new AsyncRelayCommand(ExecuteParcourir));
+                return btnParcourir ?? (new RelayCommand(
+                    () =>
+                    {
+                        Task tache = ExecuteParcourir();
+                    }));
             }
         }
 

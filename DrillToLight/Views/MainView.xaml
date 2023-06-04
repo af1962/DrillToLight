@@ -11,7 +11,6 @@
         Title="Conversion gcode" Height="700" Width="900" 
         WindowStartupLocation="CenterScreen">
 
-
     <Window.Resources>
         <conv:ColorConverter x:Key="Couleur"/>
         <conv:VisibleConverter x:Key="visible"/>
@@ -70,7 +69,6 @@
                     <TextBlock Text="G00 Z0 -> M03 S1000:" FontWeight="DemiBold" />
                     <TextBlock Text="Tête en bas -> Faisceau 100%" />
                 </StackPanel>
-
 
                 <StackPanel Background="Beige" Margin="0,40">
                     <Grid>

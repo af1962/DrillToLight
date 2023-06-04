@@ -1,6 +1,7 @@
 ﻿using DrillToLight.Interfaces;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Reflection.Metadata.Ecma335;
 
 namespace DrillToLight.Services
 {
@@ -11,7 +12,7 @@ namespace DrillToLight.Services
         {
             lecture = new ObservableCollection<string>();
 
-            using (StreamReader lire = new StreamReader(file))
+            using (StreamReader lire = new StreamReader(file,System.Text.Encoding.UTF8))
             {
                 string? ligne;
                 while ((ligne = lire.ReadLine()) != null)
