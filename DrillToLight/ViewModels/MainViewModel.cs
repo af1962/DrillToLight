@@ -30,7 +30,7 @@ namespace DrillToLight.ViewModels
 
         // Chemin du nouveau fichier
         [ObservableProperty]
-        [NotifyCanExecuteChangedFor(nameof(BtnEnregistrer))]
+        [NotifyCanExecuteChangedFor(nameof(EnregistrementCommand))]
         private string cheminNomNouveauFichier;
 
         // Chemin du fichier original
@@ -49,55 +49,43 @@ namespace DrillToLight.ViewModels
         private bool infoChargement;
 
         // Commande Bouton Parcourir
-        private RelayCommand? btnParcourir;
-        public RelayCommand? BtnParcourir
+        [RelayCommand]
+        private void Parcourir()
         {
-            get
-            {
-                return btnParcourir ?? (new RelayCommand(
-                    () =>
-                    {
-                        InfoChargement = true;
-                        CheminFichierOriginal = _dialogue.Fichier();                        
-                        Task tache = ExecuteParcourir();                       
-                    }));
-            }
+            InfoChargement = true;
+            CheminFichierOriginal = _dialogue.Fichier();
+            Task tache = ExecuteParcourir();
         }
 
         // Affichage des gcodes dans les listBox
         public async Task ExecuteParcourir()
-        {            
+        {
             GcodeOriginal.Clear(); GcodeModif.Clear();
-                   
+
             await Task.Run(() =>
             {
-               GcodeOriginal = _Lecture.GetGcode(CheminFichierOriginal);
+                GcodeOriginal = _Lecture.GetGcode(CheminFichierOriginal);
                 GcodeModif = _conversion.GetConvertir(GcodeOriginal);
                 InfoChargement = false;
             });
             CheminNomNouveauFichier = CheminFichierOriginal.Insert(CheminFichierOriginal.Length - 3, "-Laser");
-            Analyse();            
+            Analyse();
         }
 
         // Bouton modification
-        private RelayCommand btnModificationCode;
-        public RelayCommand BtnModificationCode => btnModificationCode ?? new RelayCommand(() => { ExecuteModificationCode(); });
-    
-        public void ExecuteModificationCode()
+        [RelayCommand]
+        private void ModificationCode()
         {
             GcodeModif = _modificationCode.GetModif(GcodeModif, PowerCurrent, SpeedCurrent, PowerNew, SpeedNew);
-            PowerCurrent="S"+PowerNew;
-            SpeedCurrent="F"+SpeedNew;
+            PowerCurrent = "S" + PowerNew;
+            SpeedCurrent = "F" + SpeedNew;
             SpeedNew = "";
             PowerNew = "";
         }
 
         // Commande Bouton Enregistrer
-        private RelayCommand? btnEnregistrer;
-        public RelayCommand? BtnEnregistrer => btnEnregistrer ??= new RelayCommand(ExecuteEnregistrer, () => !string.IsNullOrEmpty(CheminNomNouveauFichier));
-
-        // Commande d'enregistrement du gcode modifié
-        public void ExecuteEnregistrer()
+        [RelayCommand]
+        private void Enregistrement()
         {
             _enregistrement.Enregistrement(GcodeModif, CheminNomNouveauFichier);
             _dialogue.ShowMessage("Enregistrement", "Fichier modifié enregistré");
@@ -130,7 +118,7 @@ namespace DrillToLight.ViewModels
             tab = GcodeModif[1].Split(' ');
             PowerCurrent = tab[1];
             tab = GcodeModif[2].Split(' ');
-            SpeedCurrent = tab[1];            
+            SpeedCurrent = tab[1];
         }
     }
 }

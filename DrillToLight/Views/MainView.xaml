@@ -33,7 +33,7 @@
             <!-- Bouton parcourir-->
             <StackPanel Grid.Column="0" Grid.Row="0">
                 <Button Content="Parcourir" Width="100" Height="30" Margin="5" Style="{StaticResource btnStyle}"
-                    Command="{Binding BtnParcourir}" />
+                    Command="{Binding ParcourirCommand}" />
             </StackPanel>
 
             <!-- Chemin du fichier original -->
@@ -101,7 +101,7 @@
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Grid.ColumnSpan="2" Grid.Row="2" Margin="0,20">
-                            <Button Content="Valider" Command="{Binding BtnModificationCode}" Width="100" Style="{StaticResource btnStyle}"/>
+                            <Button Content="Valider" Command="{Binding ModificationCodeCommand}" Width="100" Style="{StaticResource btnStyle}"/>
                         </StackPanel>
                     </Grid>
                 </StackPanel>
@@ -110,7 +110,7 @@
             <!-- Bouton enregistrement -->
             <StackPanel Grid.Column="3" Grid.Row="0">
                 <Button Content="Enregistrer" Width="100" Height="30" Margin="5" Style="{StaticResource btnStyle}"
-                    Command="{Binding BtnEnregistrer}"/>
+                    Command="{Binding EnregistrementCommand}"/>
             </StackPanel>
 
             <!-- Chemin du fichier modifié -->
