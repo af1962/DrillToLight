@@ -73,7 +73,7 @@ namespace DrillToLight.ViewModels
             {
                GcodeOriginal = _Lecture.GetGcode(CheminFichierOriginal);
                 GcodeModif = _conversion.GetConvertir(GcodeOriginal);
-                InfoChargement = !InfoChargement;
+                InfoChargement = false;
             });
             CheminNomNouveauFichier = CheminFichierOriginal.Insert(CheminFichierOriginal.Length - 3, "-Laser");
             Analyse();            
