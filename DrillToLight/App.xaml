@@ -5,6 +5,7 @@
              StartupUri="Views/MainView.xaml">
     <Application.Resources>
         <ResourceDictionary>
+            <BooleanToVisibilityConverter x:Key="visibleBool"/>
                <ResourceDictionary.MergedDictionaries>
             <ResourceDictionary Source="/Dictionnaires/BoutonStyle.xaml"/>
         </ResourceDictionary.MergedDictionaries>
