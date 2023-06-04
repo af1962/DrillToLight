@@ -46,7 +46,7 @@ namespace DrillToLight.ViewModels
         ObservableCollection<string> gcodeModif;
 
         [ObservableProperty]
-        private bool infoChargement = false;
+        private bool infoChargement;
 
         // Commande Bouton Parcourir
         private RelayCommand? btnParcourir;
@@ -57,8 +57,8 @@ namespace DrillToLight.ViewModels
                 return btnParcourir ?? (new RelayCommand(
                     () =>
                     {
-                        CheminFichierOriginal = _dialogue.Fichier();
                         InfoChargement = true;
+                        CheminFichierOriginal = _dialogue.Fichier();                        
                         Task tache = ExecuteParcourir();                       
                     }));
             }
@@ -71,12 +71,12 @@ namespace DrillToLight.ViewModels
                    
             await Task.Run(() =>
             {
-                GcodeOriginal = _Lecture.GetGcode(CheminFichierOriginal);
+               GcodeOriginal = _Lecture.GetGcode(CheminFichierOriginal);
                 GcodeModif = _conversion.GetConvertir(GcodeOriginal);
-                InfoChargement = false;
+                InfoChargement = !InfoChargement;
             });
             CheminNomNouveauFichier = CheminFichierOriginal.Insert(CheminFichierOriginal.Length - 3, "-Laser");
-            Analyse();
+            Analyse();            
         }
 
         // Bouton modification
@@ -118,7 +118,7 @@ namespace DrillToLight.ViewModels
             _enregistrement = enregistrement;
             GcodeOriginal = new ObservableCollection<string>();
             gcodeModif = new ObservableCollection<string>();
-            _modificationCode = modificationCode; 
+            _modificationCode = modificationCode;
         }
 
         /// <summary>
