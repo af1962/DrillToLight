@@ -94,11 +94,11 @@
                         <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center">
                             <TextBlock Text="Nouvelle valeur" HorizontalAlignment="Center"/>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="S : "/>
-                                <TextBox Text="{Binding PowerNew}" Width="80"/>
+                                <TextBlock Text="S : " FontWeight="Bold"/>
+                                <TextBox Text="{Binding PowerNew}"  Width="80"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="F : "/>
+                                <TextBlock Text="F : " FontWeight="Bold"/>
                                 <TextBox Text="{Binding SpeedNew}" Width="80"/>
                             </StackPanel>
                         </StackPanel>
