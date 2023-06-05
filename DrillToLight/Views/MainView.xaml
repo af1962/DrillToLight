@@ -101,7 +101,7 @@
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Grid.ColumnSpan="2" Grid.Row="2" Margin="0,20">
-                            <Button Content="Valider" Command="{Binding ModificationCodeCommand}" Width="100" Style="{StaticResource btnStyle}"/>
+                            <Button Content="Valider" Command="{Binding ModificationCodeCommand}" Width="100" Style="{StaticResource btnStyle}" />
                         </StackPanel>
                     </Grid>
                 </StackPanel>

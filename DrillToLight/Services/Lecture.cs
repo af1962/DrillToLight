@@ -5,6 +5,7 @@
         ObservableCollection<string>? lecture;
         public ObservableCollection<string> GetGcode(string file)
         {
+                     
             lecture = new ObservableCollection<string>();
 
             using (StreamReader lire = new StreamReader(file, System.Text.Encoding.UTF8))

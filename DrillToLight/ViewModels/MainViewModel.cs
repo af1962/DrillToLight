@@ -1,4 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using DrillToLight.Services;
+using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DrillToLight.ViewModels
@@ -7,7 +10,8 @@ namespace DrillToLight.ViewModels
     {
         // Vitesse courante
         [ObservableProperty]
-        private string speedCurrent;
+        [NotifyCanExecuteChangedFor(nameof(ModificationCodeCommand))]
+        private string? speedCurrent;
 
         // Vitesse souhaitéé
         [ObservableProperty]
@@ -15,7 +19,7 @@ namespace DrillToLight.ViewModels
 
         // Puissance courante
         [ObservableProperty]
-        private string powerCurrent;
+        private string? powerCurrent;
 
         // Puissance souhaitée
         [ObservableProperty]
@@ -45,9 +49,13 @@ namespace DrillToLight.ViewModels
         [RelayCommand]
         private void Parcourir()
         {
-            InfoChargement = true;
             CheminFichierOriginal = _dialogue.Fichier();
-            Task tache = ExecuteParcourir();
+         
+            if (!string.IsNullOrEmpty(CheminFichierOriginal))
+            {               
+                Task tache = ExecuteParcourir();
+                InfoChargement = true;
+            }
         }
 
         // Affichage des gcodes dans les listBox
@@ -66,7 +74,7 @@ namespace DrillToLight.ViewModels
         }
 
         // Bouton modification
-        [RelayCommand]
+        [RelayCommand(CanExecute = nameof(CanExecuteModificationCode))]
         private void ModificationCode()
         {
             GcodeModif = _modificationCode.GetModif(GcodeModif, PowerCurrent, SpeedCurrent, PowerNew, SpeedNew);
@@ -76,12 +84,24 @@ namespace DrillToLight.ViewModels
             PowerNew = "";
         }
 
+        // CanExecute ModificationCode
+        private bool CanExecuteModificationCode()
+        {
+            return !string.IsNullOrEmpty(SpeedCurrent);
+        }
+
         // Commande Bouton Enregistrer
-        [RelayCommand]
+        [RelayCommand(CanExecute = nameof(CanExecuteEnregistrement))]
         private void Enregistrement()
         {
             _enregistrement.Enregistrement(GcodeModif, CheminNomNouveauFichier);
             _dialogue.ShowMessage("Enregistrement", "Fichier modifié enregistré");
+        }
+
+        // CanExecute Enregistrement fichier
+        private bool CanExecuteEnregistrement()
+        {
+            return !string.IsNullOrEmpty(CheminNomNouveauFichier);
         }
 
         // Services
@@ -100,6 +120,7 @@ namespace DrillToLight.ViewModels
             GcodeOriginal = new ObservableCollection<string>();
             gcodeModif = new ObservableCollection<string>();
             _modificationCode = modificationCode;
+           
         }
 
         /// <summary>
