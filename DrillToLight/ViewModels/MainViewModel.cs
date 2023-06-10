@@ -11,7 +11,7 @@ namespace DrillToLight.ViewModels
         // Vitesse courante
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(ModificationCodeCommand))]
-        private string? speedCurrent;
+        private string speedCurrent;
 
         // Vitesse souhaitéé
         [ObservableProperty]
@@ -19,7 +19,7 @@ namespace DrillToLight.ViewModels
 
         // Puissance courante
         [ObservableProperty]
-        private string? powerCurrent;
+        private string powerCurrent;
 
         // Puissance souhaitée
         [ObservableProperty]
@@ -28,11 +28,11 @@ namespace DrillToLight.ViewModels
         // Chemin du nouveau fichier
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(EnregistrementCommand))]
-        private string cheminNomNouveauFichier;
+        private string? cheminNomNouveauFichier;
 
         // Chemin du fichier original
         [ObservableProperty]
-        private string? cheminFichierOriginal;
+        private string cheminFichierOriginal;
 
         // Gcode original
         [ObservableProperty]
@@ -42,19 +42,15 @@ namespace DrillToLight.ViewModels
         [ObservableProperty]
         ObservableCollection<string> gcodeModif;
 
-        [ObservableProperty]
-        private bool infoChargement;
-
         // Commande Bouton Parcourir
         [RelayCommand]
         private void Parcourir()
-        {
+        {            
             CheminFichierOriginal = _dialogue.Fichier();
          
             if (!string.IsNullOrEmpty(CheminFichierOriginal))
             {               
                 Task tache = ExecuteParcourir();
-                InfoChargement = true;
             }
         }
 
@@ -67,7 +63,6 @@ namespace DrillToLight.ViewModels
             {
                 GcodeOriginal = _Lecture.GetGcode(CheminFichierOriginal);
                 GcodeModif = _conversion.GetConvertir(GcodeOriginal);
-                InfoChargement = false;
             });
             CheminNomNouveauFichier = CheminFichierOriginal.Insert(CheminFichierOriginal.Length - 3, "-Laser");
             Analyse();

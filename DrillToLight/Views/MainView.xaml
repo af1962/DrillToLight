@@ -13,7 +13,7 @@
 
     <Window.Resources>
         <conv:ColorConverter x:Key="Couleur"/>
-        <!--<conv:VisibleConverter x:Key="visible"/>-->
+        <conv:VisibleConverter x:Key="visibleString"/>
     </Window.Resources>
 
     <Grid Margin="10">
@@ -57,7 +57,7 @@
 
             <!-- ProgressBar -->
             <StackPanel Grid.Column="1" Grid.Row="1" Margin="10"
-                        Visibility="{Binding InfoChargement,Converter={StaticResource visibleBool}}">
+                        Visibility="{Binding CheminNomNouveauFichier,Converter={StaticResource visibleString}}">
                 <TextBlock Text="Traitement en cours ..." HorizontalAlignment="Center" FontWeight="Bold"/>
             </StackPanel>
 
