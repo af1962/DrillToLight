@@ -42,6 +42,9 @@ namespace DrillToLight.ViewModels
         [ObservableProperty]
         ObservableCollection<string> gcodeModif;
 
+        [ObservableProperty]
+        private bool chargement;
+
         // Commande Bouton Parcourir
         [RelayCommand]
         private void Parcourir()
@@ -51,6 +54,7 @@ namespace DrillToLight.ViewModels
             if (!string.IsNullOrEmpty(CheminFichierOriginal))
             {               
                 Task tache = ExecuteParcourir();
+                Chargement = true;
             }
         }
 
@@ -63,6 +67,7 @@ namespace DrillToLight.ViewModels
             {
                 GcodeOriginal = _Lecture.GetGcode(CheminFichierOriginal);
                 GcodeModif = _conversion.GetConvertir(GcodeOriginal);
+                Chargement = false;
             });
             CheminNomNouveauFichier = CheminFichierOriginal.Insert(CheminFichierOriginal.Length - 3, "-Laser");
             Analyse();
@@ -113,7 +118,7 @@ namespace DrillToLight.ViewModels
             _conversion = conversion;
             _enregistrement = enregistrement;
             GcodeOriginal = new ObservableCollection<string>();
-            gcodeModif = new ObservableCollection<string>();
+            GcodeModif = new ObservableCollection<string>();
             _modificationCode = modificationCode;
            
         }

@@ -12,8 +12,7 @@
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
-        <conv:ColorConverter x:Key="Couleur"/>
-        <conv:VisibleConverter x:Key="visibleString"/>
+        <conv:ColorConverter x:Key="Couleur"/>        
     </Window.Resources>
 
     <Grid Margin="10">
@@ -57,7 +56,7 @@
 
             <!-- ProgressBar -->
             <StackPanel Grid.Column="1" Grid.Row="1" Margin="10"
-                        Visibility="{Binding CheminNomNouveauFichier,Converter={StaticResource visibleString}}">
+                        Visibility="{Binding Chargement,Converter={StaticResource visibleBool}}">
                 <TextBlock Text="Traitement en cours ..." HorizontalAlignment="Center" FontWeight="Bold"/>
             </StackPanel>
 
