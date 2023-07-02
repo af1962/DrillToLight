@@ -37,7 +37,7 @@
 
             <!-- Chemin du fichier original -->
             <StackPanel Grid.Column="0" Grid.Row="1">
-                <TextBlock Text="Source Coppercam"/>
+                <TextBlock Text="Source Coppercam" Foreground="Red" FontWeight="Bold" TextDecorations="Underline"/>
                 <TextBlock Text="{Binding CheminFichierOriginal}" />
             </StackPanel>
 
@@ -114,7 +114,7 @@
 
             <!-- Chemin du fichier modifié -->
             <StackPanel Grid.Column="3" Grid.Row="1">
-                <TextBlock Text="Déstination LaserGrbl"/>
+                <TextBlock Text="Déstination LaserGrbl" Foreground="Green" FontWeight="Bold" TextDecorations="Underline" />
                 <TextBlock Text="{Binding CheminNomNouveauFichier}" />
             </StackPanel>
 

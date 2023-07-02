@@ -28,7 +28,7 @@ namespace DrillToLight.ViewModels
         // Chemin du nouveau fichier
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(EnregistrementCommand))]
-        private string? cheminNomNouveauFichier;
+        private string cheminNomNouveauFichier;
 
         // Chemin du fichier original
         [ObservableProperty]
@@ -120,7 +120,7 @@ namespace DrillToLight.ViewModels
             GcodeOriginal = new ObservableCollection<string>();
             GcodeModif = new ObservableCollection<string>();
             _modificationCode = modificationCode;
-           
+
         }
 
         /// <summary>
