@@ -10,7 +10,7 @@
             for (int i = 10; i <= gcodeDrill.Count - 5; i++)
             {
 
-                if (!gcodeDrill[i].Contains("-") && !gcodeDrill[i].Contains("Z0") && !gcodeDrill[i].Contains("Z2"))
+                if (!gcodeDrill[i].Contains('-') && !gcodeDrill[i].Contains("Z0") && !gcodeDrill[i].Contains("Z2"))
                 {
                     conversion.Add(gcodeDrill[i]);
                 }

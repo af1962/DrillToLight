@@ -11,28 +11,28 @@ namespace DrillToLight.ViewModels
         // Vitesse courante
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(ModificationCodeCommand))]
-        private string speedCurrent;
+        private string speedCurrent = string.Empty;
 
         // Vitesse souhaitéé
         [ObservableProperty]
-        private string speedNew;
+        private string speedNew=string.Empty;
 
         // Puissance courante
         [ObservableProperty]
-        private string powerCurrent;
+        private string powerCurrent=string.Empty;
 
         // Puissance souhaitée
         [ObservableProperty]
-        private string powerNew;
+        private string powerNew=string.Empty;
 
         // Chemin du nouveau fichier
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(EnregistrementCommand))]
-        private string cheminNomNouveauFichier;
+        private string cheminNomNouveauFichier = string.Empty;
 
         // Chemin du fichier original
         [ObservableProperty]
-        private string cheminFichierOriginal;
+        private string cheminFichierOriginal = string.Empty;
 
         // Gcode original
         [ObservableProperty]
@@ -120,7 +120,6 @@ namespace DrillToLight.ViewModels
             GcodeOriginal = new ObservableCollection<string>();
             GcodeModif = new ObservableCollection<string>();
             _modificationCode = modificationCode;
-
         }
 
         /// <summary>
