@@ -12,7 +12,6 @@
                         ecrire.WriteLine(collection[i]);
                     }
                 }
-                ecrire.Close();
             }
         }
     }

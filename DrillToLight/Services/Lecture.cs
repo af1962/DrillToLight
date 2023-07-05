@@ -15,8 +15,6 @@
                 {
                     lecture.Add(ligne);
                 }
-
-                lire.Close();
             }
 
             return lecture;
