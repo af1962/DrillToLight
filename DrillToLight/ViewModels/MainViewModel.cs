@@ -1,7 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using DrillToLight.Services;
-using System;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace DrillToLight.ViewModels
@@ -15,15 +12,15 @@ namespace DrillToLight.ViewModels
 
         // Vitesse souhaitéé
         [ObservableProperty]
-        private string speedNew=string.Empty;
+        private string speedNew = string.Empty;
 
         // Puissance courante
         [ObservableProperty]
-        private string powerCurrent=string.Empty;
+        private string powerCurrent = string.Empty;
 
         // Puissance souhaitée
         [ObservableProperty]
-        private string powerNew=string.Empty;
+        private string powerNew = string.Empty;
 
         // Chemin du nouveau fichier
         [ObservableProperty]
@@ -48,11 +45,11 @@ namespace DrillToLight.ViewModels
         // Commande Bouton Parcourir
         [RelayCommand]
         private void Parcourir()
-        {            
+        {
             CheminFichierOriginal = _dialogue.Fichier();
-         
+
             if (!string.IsNullOrEmpty(CheminFichierOriginal))
-            {               
+            {
                 Task tache = ExecuteParcourir();
                 Chargement = true;
             }
@@ -78,8 +75,8 @@ namespace DrillToLight.ViewModels
         private void ModificationCode()
         {
             GcodeModif = _modificationCode.GetModif(GcodeModif, PowerCurrent, SpeedCurrent, PowerNew, SpeedNew);
-            PowerCurrent = "S" + PowerNew;
-            SpeedCurrent = "F" + SpeedNew;
+            if (SpeedNew != ""){SpeedCurrent = SpeedNew;}
+            if (PowerNew != ""){PowerCurrent = PowerNew;}
             SpeedNew = "";
             PowerNew = "";
         }
@@ -124,14 +121,15 @@ namespace DrillToLight.ViewModels
 
         /// <summary>
         /// Détermine la puissance et la vitesse par défaut
+        /// se trouve en début de code de GcodeModif
         /// </summary>
         public void Analyse()
         {
             string[] tab;
             tab = GcodeModif[1].Split(' ');
-            PowerCurrent = tab[1];
+            PowerCurrent = tab[1][1..];
             tab = GcodeModif[2].Split(' ');
-            SpeedCurrent = tab[1];
+            SpeedCurrent = tab[1][1..] ;
         }
     }
 }

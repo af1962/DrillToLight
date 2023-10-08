@@ -10,11 +10,11 @@ namespace DrillToLight.Convertisseurs
         {
             string ligne = (string)value;
 
-            if (ligne.Contains("F"))
+            if (ligne.Contains('F'))
             {
                 return "blue";
             }
-            if (ligne.Contains("S"))
+            if (ligne.Contains('S'))
             {
                 return "red";
             }

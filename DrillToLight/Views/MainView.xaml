@@ -85,8 +85,8 @@
                         </StackPanel>
                         <StackPanel Grid.Column="0" Grid.Row="1">
                             <TextBlock Text="Valeur actuelle" HorizontalAlignment="Center"/>
-                            <TextBlock Text="{Binding PowerCurrent}" Foreground="Red" HorizontalAlignment="Center"/>
-                            <TextBlock Text="{Binding SpeedCurrent}" Foreground="Blue" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding PowerCurrent,StringFormat='S{0}'}" Foreground="Red" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding SpeedCurrent,StringFormat='F{0}'}" Foreground="Blue" HorizontalAlignment="Center"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center">
                             <TextBlock Text="Nouvelle valeur" HorizontalAlignment="Center"/>
