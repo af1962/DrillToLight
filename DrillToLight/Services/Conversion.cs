@@ -6,8 +6,15 @@
         public ObservableCollection<string> GetConvertir(ObservableCollection<string> gcodeDrill)
         {
             conversion = new ObservableCollection<string>();
+            string recherche = "";
+            int k = 0;
+            while (recherche !="G00 Z2")
+            {
+                recherche = gcodeDrill[k];
+                k++;
+            }
 
-            for (int i = 10; i <= gcodeDrill.Count - 5; i++)
+            for (int i = k-1; i <= gcodeDrill.Count - 5; i++)
             {
 
                 if (!gcodeDrill[i].Contains('-') && !gcodeDrill[i].Contains("Z0") && !gcodeDrill[i].Contains("Z2"))
