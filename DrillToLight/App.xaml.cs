@@ -38,7 +38,7 @@ namespace DrillToLight
             services.AddSingleton<IDialogue, Dialogue>();
             services.AddSingleton<ILecture, Lecture>();
             services.AddSingleton<IConversion, Conversion>();
-            services.AddSingleton<IEnregistrement, Enregistrement>();
+            services.AddSingleton<IEnregistrement, EnregistrementFichier>();
             services.AddScoped<IModificationCode, ModificationCode>();
 
 

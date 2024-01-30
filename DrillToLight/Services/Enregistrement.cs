@@ -1,8 +1,8 @@
 ﻿namespace DrillToLight.Services
 {
-    internal class Enregistrement : IEnregistrement
+    internal class EnregistrementFichier : IEnregistrement
     {
-        void IEnregistrement.Enregistrement(ObservableCollection<string> collection, string chemin)
+        public void Sauvegarde(ObservableCollection<string> collection, string chemin)
         {
             using (StreamWriter ecrire = new StreamWriter(chemin))
             {

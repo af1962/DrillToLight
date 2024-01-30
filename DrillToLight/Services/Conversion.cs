@@ -14,7 +14,7 @@
                 k++;
             }
 
-            for (int i = k-1; i <= gcodeDrill.Count - 5; i++)
+            for (int i = k-1; i < gcodeDrill.Count - 4; i++)
             {
 
                 if (!gcodeDrill[i].Contains('-') && !gcodeDrill[i].Contains("Z0") && !gcodeDrill[i].Contains("Z2"))

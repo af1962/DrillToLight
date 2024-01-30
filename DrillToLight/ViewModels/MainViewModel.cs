@@ -91,7 +91,7 @@ namespace DrillToLight.ViewModels
         [RelayCommand(CanExecute = nameof(CanExecuteEnregistrement))]
         private void Enregistrement()
         {
-            _enregistrement.Enregistrement(GcodeModif, CheminNomNouveauFichier);
+            _enregistrement.Sauvegarde(GcodeModif, CheminNomNouveauFichier);
             _dialogue.ShowMessage("Enregistrement", "Fichier modifié enregistré");
         }
 
