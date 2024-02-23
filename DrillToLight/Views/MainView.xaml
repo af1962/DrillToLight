@@ -42,8 +42,7 @@
             </StackPanel>
 
             <!-- Affichage du gcode original-->
-            <ScrollViewer Grid.Row="2" Grid.Column="0">
-                <ListBox x:Name="lstFichier" ItemsSource="{Binding GcodeOriginal}">
+                <ListBox Grid.Row="2" Grid.Column="0"  x:Name="lstFichier" ItemsSource="{Binding GcodeOriginal}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -52,7 +51,6 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-            </ScrollViewer>
 
             <!-- ProgressBar -->
             <StackPanel Grid.Column="1" Grid.Row="1" Margin="10"
@@ -119,8 +117,7 @@
             </StackPanel>
 
             <!-- Affichage du gcode modifié -->
-            <ScrollViewer Grid.Column="2" Grid.Row="2">
-                <ListBox ItemsSource="{Binding GcodeModif}" >
+                <ListBox Grid.Row="2" Grid.Column="2" ItemsSource="{Binding GcodeModif}" >
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -129,7 +126,6 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-            </ScrollViewer>
         </Grid>
 
     </Grid>
