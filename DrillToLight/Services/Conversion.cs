@@ -24,12 +24,12 @@
 
                 if (gcodeDrill[i].Contains("Z0"))
                 {
-                    conversion.Add("M03 S1000");
+                    conversion.Add("G0 Z0 M03 S1000");
                 }
 
                 if (gcodeDrill[i].Contains("Z2"))
                 {
-                    conversion.Add("M03 S0");
+                    conversion.Add("G0 Z0 M03 S0");
                 }
             }
 
