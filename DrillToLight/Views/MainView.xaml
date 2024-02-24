@@ -25,7 +25,7 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
@@ -39,17 +39,18 @@
             <StackPanel Grid.Column="0" Grid.Row="1">
                 <TextBlock Text="Source Coppercam" Foreground="Red" FontWeight="Bold" TextDecorations="Underline"/>
                 <TextBlock Text="{Binding CheminFichierOriginal}" />
+                <TextBlock Text="{Binding GcodeOriginal.Count,StringFormat='Lignes : {0:D}'}"/>
             </StackPanel>
 
             <!-- Affichage du gcode original-->
                 <ListBox Grid.Row="2" Grid.Column="0"  x:Name="lstFichier" ItemsSource="{Binding GcodeOriginal}">
-                    <ListBox.ItemTemplate>
+                    <!--<ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
                                 <TextBlock Text="{Binding}"/>
                             </StackPanel>
                         </DataTemplate>
-                    </ListBox.ItemTemplate>
+                    </ListBox.ItemTemplate>-->
                 </ListBox>
 
             <!-- ProgressBar -->
