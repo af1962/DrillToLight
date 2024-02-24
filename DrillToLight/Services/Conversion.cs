@@ -8,7 +8,7 @@
             conversion = new ObservableCollection<string>();
             string str = "";
             int k = 0;
-            while (str != "G00 Z2")
+            while (!str.Contains('Z'))
             {
                 str = gcodeDrill[k];
                 k++;
