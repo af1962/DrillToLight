@@ -43,14 +43,9 @@
             </StackPanel>
 
             <!-- Affichage du gcode original-->
-                <ListBox Grid.Row="2" Grid.Column="0"  x:Name="lstFichier" ItemsSource="{Binding GcodeOriginal}">
-                    <!--<ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock Text="{Binding}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>-->
+                <ListBox Grid.Row="2" Grid.Column="0"  x:Name="lstFichier" 
+                         ItemsSource="{Binding GcodeOriginal}">
+                  
                 </ListBox>
 
             <!-- ProgressBar -->
