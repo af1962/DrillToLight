@@ -127,7 +127,7 @@ namespace DrillToLight.ViewModels
         {
             string[] tab;
             tab = GcodeModif[2].Split(' ');
-            PowerCurrent = tab[1][1..]; // Chaîne à partir du 1er caractère pour éviter le doublon à l'affichage
+            PowerCurrent = tab[3][1..]; // Chaîne à partir du 1er caractère pour éviter le doublon à l'affichage
             tab = GcodeModif[3].Split(' ');
             SpeedCurrent = tab[1][1..] ;
         }
