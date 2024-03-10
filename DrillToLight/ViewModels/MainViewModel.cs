@@ -66,7 +66,6 @@ namespace DrillToLight.ViewModels
                 GcodeModif = _conversion.GetConvertir(GcodeOriginal);
                 Chargement = false;
             });
-            CheminNomNouveauFichier = CheminFichierOriginal.Insert(CheminFichierOriginal.Length - 3, "-Laser");
             Analyse();
         }
 
@@ -88,18 +87,13 @@ namespace DrillToLight.ViewModels
         }
 
         // Commande Bouton Enregistrer
-        [RelayCommand(CanExecute = nameof(CanExecuteEnregistrement))]
+        [RelayCommand]
         private void Enregistrement()
         {
+            CheminNomNouveauFichier = CheminFichierOriginal.Insert(CheminFichierOriginal.Length - 3, "-Laser - F" + SpeedCurrent + "_S" + PowerCurrent);
             _enregistrement.Sauvegarde(GcodeModif, CheminNomNouveauFichier);
             _dialogue.ShowMessage("Enregistrement", "Fichier modifié enregistré");
-        }
-
-        // CanExecute Enregistrement fichier
-        private bool CanExecuteEnregistrement()
-        {
-            return !string.IsNullOrEmpty(CheminNomNouveauFichier);
-        }
+        }            
 
         // Services
         IDialogue _dialogue;
