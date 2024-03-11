@@ -90,7 +90,7 @@ namespace DrillToLight.ViewModels
         [RelayCommand]
         private void Enregistrement()
         {
-            CheminNomNouveauFichier = CheminFichierOriginal.Insert(CheminFichierOriginal.Length - 3, "-Laser - F" + SpeedCurrent + "_S" + PowerCurrent);
+            CheminNomNouveauFichier = CheminFichierOriginal.Insert(CheminFichierOriginal.Length - 3, "-Laser - S"+PowerCurrent + "- F" + SpeedCurrent);
             _enregistrement.Sauvegarde(GcodeModif, CheminNomNouveauFichier);
             _dialogue.ShowMessage("Enregistrement", "Fichier modifié enregistré");
         }            
