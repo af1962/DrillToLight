@@ -2,43 +2,53 @@
 {
     internal class Conversion : IConversion
     {
-        ObservableCollection<string>? conversion;
+        ObservableCollection<string>? gcodeLaser;
         public ObservableCollection<string> GetConvertir(ObservableCollection<string> gcodeDrill)
         {
-            conversion = new ObservableCollection<string>();
+            gcodeLaser = new ObservableCollection<string>();
             string str = "";
-            int k = 0;
+
+            // Recherche le dernier Z
+            int fin = gcodeDrill.Count;
             while (!str.Contains('Z'))
             {
-                str = gcodeDrill[k];
-                k++;
+                str = gcodeDrill[fin - 1];
+                fin--;
             }
 
-            for (int i = k - 1; i < gcodeDrill.Count - 4; i++)
+            // Recherche le premier Z
+            str = "";
+            int debut = 0;
+            while (!str.Contains('Z'))
             {
+                str = gcodeDrill[debut];
+                debut++;
+            }
 
+            for (int i = debut - 1; i < fin; i++)
+            {
                 if (gcodeDrill[i].Contains('Z'))
                 {
                     if (gcodeDrill[i].Contains("Z0"))
                     {
-                        conversion.Add("G0 Z0 M03 S1000");
+                        gcodeLaser.Add("G0 Z0 M03 S1000");
                     }
                     else
                     {
                         if (!gcodeDrill[i].Contains('-'))
                         {
-                            conversion.Add("G0 Z0 M03 S0");
+                            gcodeLaser.Add("G0 Z0 M03 S0");
                         }
                     }
                 }
                 else
                 {
-                    conversion.Add(gcodeDrill[i]);
+                    gcodeLaser.Add(gcodeDrill[i]);
                 }
             }
-            conversion.Add("M03 S0");
+            gcodeLaser.Add("M03 S0");
 
-            return conversion;
+            return gcodeLaser;
         }
     }
 }
