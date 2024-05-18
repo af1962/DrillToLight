@@ -13,12 +13,12 @@
 
             for (int i = 0; i < code.Count; i++)
             {
-                if (code[i].Contains(currentP) && !code[i].Contains("S0") && newP.Length>2)
+                if (code[i].Contains(currentP) && !code[i].Contains("S0") && newP.Length>=2)
                 {
                     code[i] = code[i].Replace(currentP, newP);
                 }
 
-                if (code[i].Contains(currentS) && newS.Length>2 )
+                if (code[i].Contains(currentS) && newS.Length>=2 )
                 {
                     code[i] = code[i].Replace(currentS, newS);
                 }

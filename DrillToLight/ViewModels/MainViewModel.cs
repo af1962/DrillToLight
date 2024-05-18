@@ -83,7 +83,7 @@ namespace DrillToLight.ViewModels
         // CanExecute ModificationCode
         private bool CanExecuteModificationCode()
         {
-            return !string.IsNullOrEmpty(SpeedCurrent);
+            return (!string.IsNullOrEmpty(SpeedCurrent) && !string.IsNullOrEmpty(PowerCurrent));
         }
 
         // Commande Bouton Enregistrer
