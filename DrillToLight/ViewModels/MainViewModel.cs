@@ -115,7 +115,7 @@ namespace DrillToLight.ViewModels
             GcodeModif = new ObservableCollection<string>();
             _modificationCode = modificationCode;
 
-            Version = string.Format("Convertiseur Gcode - Version {0}", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);      
+            Version = "Convertisseur de Gcode - Version du 24/05/2024";
         }
 
         /// <summary>
