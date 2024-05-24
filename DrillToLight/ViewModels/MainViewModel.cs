@@ -5,6 +5,9 @@ namespace DrillToLight.ViewModels
 {
     internal partial class MainViewModel : ObservableObject
     {
+        [ObservableProperty]
+        private string version;
+        
         // Vitesse courante
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(ModificationCodeCommand))]
@@ -111,6 +114,8 @@ namespace DrillToLight.ViewModels
             GcodeOriginal = new ObservableCollection<string>();
             GcodeModif = new ObservableCollection<string>();
             _modificationCode = modificationCode;
+
+            Version = string.Format("Convertiseur Gcode - Version {0}", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);      
         }
 
         /// <summary>

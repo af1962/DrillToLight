@@ -7,6 +7,7 @@
         {
             gcodeLaser = new ObservableCollection<string>();
             string str = "";
+            string [] tab;
 
             // Recherche le dernier Z
             int fin = gcodeDrill.Count;
@@ -27,11 +28,19 @@
 
             for (int i = debut - 1; i < fin; i++)
             {
+                // Remplace tous les Fxx par F150. Les F sur les lignes avec Z seront de toutes façons supprimés par le code suivant
+                if (gcodeDrill[i].Contains('F'))
+                {
+                    tab = gcodeDrill[i].Split(' ');
+                    gcodeDrill[i] = gcodeDrill[i].Replace(tab[1], "F150");
+                }
+
+                // Adaptation course au laser
                 if (gcodeDrill[i].Contains('Z'))
                 {
                     if (gcodeDrill[i].Contains("Z0"))
                     {
-                        gcodeLaser.Add("G0 Z0 M03 S1000");
+                        gcodeLaser.Add("G0 Z0 M03 S100");
                     }
                     else
                     {
@@ -45,7 +54,10 @@
                 {
                     gcodeLaser.Add(gcodeDrill[i]);
                 }
+
             }
+
+            // Arrêt du laser à la fin
             gcodeLaser.Add("M03 S0");
 
             return gcodeLaser;
