@@ -1,4 +1,10 @@
-﻿namespace DrillToLight.Services
+﻿using Microsoft.VisualBasic;
+using System;
+using System.Linq;
+using System.Windows.Automation.Peers;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace DrillToLight.Services
 {
     internal class Conversion : IConversion
     {
@@ -7,7 +13,8 @@
         {
             gcodeLaser = new ObservableCollection<string>();
             string str = "";
-            string [] tab;
+            string[] tab;
+            int index;
 
             // Recherche le dernier Z
             int fin = gcodeDrill.Count;
@@ -28,11 +35,14 @@
 
             for (int i = debut - 1; i < fin; i++)
             {
-                // Remplace tous les Fxx par F150. Les F sur les lignes avec Z seront de toutes façons supprimés par le code suivant
+                // Remplace tous les Fxx par F150. Les F sur les lignes avec Z seront de toutes façons supprimés par la suite
                 if (gcodeDrill[i].Contains('F'))
                 {
                     tab = gcodeDrill[i].Split(' ');
-                    gcodeDrill[i] = gcodeDrill[i].Replace(tab[1], "F150");
+
+                    // Recherche de l'index de l'élément commençant par un 'F'dans le tableau de string tab
+                    index = Array.IndexOf(tab, Array.Find(tab, item => item.StartsWith("F", StringComparison.Ordinal)));
+                    gcodeDrill[i] = gcodeDrill[i].Replace(tab[index], "F150");
                 }
 
                 // Adaptation course au laser
