@@ -73,8 +73,9 @@ namespace DrillToLight.ViewModels
                 GcodeModif = _conversion.GetConvertir(GcodeOriginal);
                 Chargement = false;
             });
-            Analyse();
-            NewFile();
+            PowerCurrent = "100";
+            SpeedCurrent = "150";
+            CheminNomNouveauFichier = NewFile(CheminFichierOriginal);
         }
 
         /// <summary>
@@ -88,7 +89,7 @@ namespace DrillToLight.ViewModels
             if (PowerNew != "") { PowerCurrent = PowerNew; }
             SpeedNew = "";
             PowerNew = "";
-            NewFile();
+            CheminNomNouveauFichier = NewFile(CheminFichierOriginal);
         }
 
         /// <summary>
@@ -113,9 +114,10 @@ namespace DrillToLight.ViewModels
         /// <summary>
         /// Chemin du fichier de sortie
         /// </summary>
-        private void NewFile()
+        private string NewFile(string file)
         {
-            CheminNomNouveauFichier = CheminFichierOriginal.Insert(CheminFichierOriginal.Length - 3, "-Laser - S" + PowerCurrent + "- F" + SpeedCurrent);
+            //CheminNomNouveauFichier = CheminFichierOriginal.Insert(CheminFichierOriginal.Length - 3, "-Laser - S" + PowerCurrent + "- F" + SpeedCurrent);
+            return file.Insert(file.Length - 3, "-Laser - S" + PowerCurrent + "- F" + SpeedCurrent);
         }
 
         // Services
@@ -144,19 +146,6 @@ namespace DrillToLight.ViewModels
             _modificationCode = modificationCode;
 
             Version = "Convertisseur de Gcode - Version du 26/05/2024";
-        }
-
-        /// <summary>
-        /// Détermine la puissance et la vitesse par défaut
-        /// se trouve en début de code de GcodeModif
-        /// </summary>
-        public void Analyse()
-        {
-            string[] tab;
-            tab = GcodeModif[2].Split(' ');
-            PowerCurrent = tab[3][1..]; // Chaîne à partir du 1er caractère pour éviter le doublon à l'affichage
-            tab = GcodeModif[3].Split(' ');
-            SpeedCurrent = tab[1][1..];
         }
     }
 }

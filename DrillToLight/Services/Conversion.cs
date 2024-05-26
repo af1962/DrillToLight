@@ -24,17 +24,17 @@ namespace DrillToLight.Services
                 fin--;
             }
 
-            // Recherche le premier Z
+            // Recherche le premier X
             str = "";
             int debut = 0;
-            while (!str.Contains('Z'))
+            while (!str.Contains("G00"))
             {
                 str = gcodeDrill[debut];
                 debut++;
             }
 
             // Mise en du Gcode
-            for (int i = debut - 1; i < fin; i++)
+            for (int i = debut-1; i < fin; i++)
             {
                 // Remplace tous les Fxx par F150. Les F sur les lignes avec Z seront de toutes façons supprimés par la suite
                 if (gcodeDrill[i].Contains('F'))
