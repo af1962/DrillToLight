@@ -33,6 +33,7 @@ namespace DrillToLight.Services
                 debut++;
             }
 
+            // Mise en du Gcode
             for (int i = debut - 1; i < fin; i++)
             {
                 // Remplace tous les Fxx par F150. Les F sur les lignes avec Z seront de toutes façons supprimés par la suite
@@ -45,7 +46,7 @@ namespace DrillToLight.Services
                     gcodeDrill[i] = gcodeDrill[i].Replace(tab[index], "F150");
                 }
 
-                // Adaptation course au laser
+                // Change tous les Z en Z0. Avec activation et désactivation du laser
                 if (gcodeDrill[i].Contains('Z'))
                 {
                     if (gcodeDrill[i].Contains("Z0"))

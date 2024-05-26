@@ -7,7 +7,7 @@ namespace DrillToLight.ViewModels
     {
         [ObservableProperty]
         private string version;
-        
+
         // Vitesse courante
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(ModificationCodeCommand))]
@@ -27,7 +27,6 @@ namespace DrillToLight.ViewModels
 
         // Chemin du nouveau fichier
         [ObservableProperty]
-        [NotifyCanExecuteChangedFor(nameof(EnregistrementCommand))]
         private string cheminNomNouveauFichier = string.Empty;
 
         // Chemin du fichier original
@@ -45,7 +44,9 @@ namespace DrillToLight.ViewModels
         [ObservableProperty]
         private bool chargement;
 
-        // Commande Bouton Parcourir
+        /// <summary>
+        /// Commande Bouton Parcourir
+        /// </summary>
         [RelayCommand]
         private void Parcourir()
         {
@@ -58,7 +59,10 @@ namespace DrillToLight.ViewModels
             }
         }
 
-        // Affichage des gcodes dans les listBox
+        /// <summary>
+        /// Affichage des gcodes dans les listBox
+        /// </summary>
+        /// <returns></returns>
         public async Task ExecuteParcourir()
         {
             GcodeOriginal.Clear(); GcodeModif.Clear();
@@ -70,33 +74,49 @@ namespace DrillToLight.ViewModels
                 Chargement = false;
             });
             Analyse();
+            NewFile();
         }
 
-        // Bouton modification
+        /// <summary>
+        /// Bouton modification
+        /// </summary>
         [RelayCommand(CanExecute = nameof(CanExecuteModificationCode))]
         private void ModificationCode()
         {
             GcodeModif = _modificationCode.GetModif(GcodeModif, PowerCurrent, SpeedCurrent, PowerNew, SpeedNew);
-            if (SpeedNew != ""){SpeedCurrent = SpeedNew;}
-            if (PowerNew != ""){PowerCurrent = PowerNew;}
+            if (SpeedNew != "") { SpeedCurrent = SpeedNew; }
+            if (PowerNew != "") { PowerCurrent = PowerNew; }
             SpeedNew = "";
             PowerNew = "";
+            NewFile();
         }
 
-        // CanExecute ModificationCode
+        /// <summary>
+        /// CanExecute ModificationCode
+        /// </summary>
+        /// <returns></returns>
         private bool CanExecuteModificationCode()
         {
             return (!string.IsNullOrEmpty(SpeedCurrent) && !string.IsNullOrEmpty(PowerCurrent));
         }
 
-        // Commande Bouton Enregistrer
+        /// <summary>
+        /// Commande Bouton Enregistrer
+        /// </summary>
         [RelayCommand]
         private void Enregistrement()
         {
-            CheminNomNouveauFichier = CheminFichierOriginal.Insert(CheminFichierOriginal.Length - 3, "-Laser - S"+PowerCurrent + "- F" + SpeedCurrent);
             _enregistrement.Sauvegarde(GcodeModif, CheminNomNouveauFichier);
             _dialogue.ShowMessage("Enregistrement", "Fichier modifié enregistré");
-        }            
+        }
+
+        /// <summary>
+        /// Chemin du fichier de sortie
+        /// </summary>
+        private void NewFile()
+        {
+            CheminNomNouveauFichier = CheminFichierOriginal.Insert(CheminFichierOriginal.Length - 3, "-Laser - S" + PowerCurrent + "- F" + SpeedCurrent);
+        }
 
         // Services
         IDialogue _dialogue;
@@ -105,6 +125,14 @@ namespace DrillToLight.ViewModels
         IEnregistrement _enregistrement;
         IModificationCode _modificationCode;
 
+        /// <summary>
+        /// Constructeur
+        /// </summary>
+        /// <param name="dialogue"></param>
+        /// <param name="lecture"></param>
+        /// <param name="conversion"></param>
+        /// <param name="enregistrement"></param>
+        /// <param name="modificationCode"></param>
         public MainViewModel(IDialogue dialogue, ILecture lecture, IConversion conversion, IEnregistrement enregistrement, IModificationCode modificationCode)
         {
             _dialogue = dialogue;
@@ -115,7 +143,7 @@ namespace DrillToLight.ViewModels
             GcodeModif = new ObservableCollection<string>();
             _modificationCode = modificationCode;
 
-            Version = "Convertisseur de Gcode - Version du 24/05/2024";
+            Version = "Convertisseur de Gcode - Version du 26/05/2024";
         }
 
         /// <summary>
@@ -128,7 +156,7 @@ namespace DrillToLight.ViewModels
             tab = GcodeModif[2].Split(' ');
             PowerCurrent = tab[3][1..]; // Chaîne à partir du 1er caractère pour éviter le doublon à l'affichage
             tab = GcodeModif[3].Split(' ');
-            SpeedCurrent = tab[1][1..] ;
+            SpeedCurrent = tab[1][1..];
         }
     }
 }

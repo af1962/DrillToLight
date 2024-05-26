@@ -8,7 +8,7 @@
         xmlns:conv="clr-namespace:DrillToLight.Convertisseurs"
         d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
         mc:Ignorable="d"
-        Title="{Binding Version}" Height="700" Width="900" 
+        Title="{Binding Version}" Height="700" Width="1200" 
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
