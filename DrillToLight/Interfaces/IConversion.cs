@@ -2,6 +2,6 @@
 {
     internal interface IConversion
     {
-        ObservableCollection<string> GetConvertir(ObservableCollection<string> collection);
+        ObservableCollection<string> GetConvertir(ObservableCollection<string> collection,int ind);
     }
 }

@@ -1,15 +1,11 @@
-﻿using Microsoft.VisualBasic;
-using System;
-using System.Linq;
-using System.Windows.Automation.Peers;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using System;
 
 namespace DrillToLight.Services
 {
     internal class Conversion : IConversion
     {
         ObservableCollection<string>? gcodeLaser;
-        public ObservableCollection<string> GetConvertir(ObservableCollection<string> gcodeDrill)
+        public ObservableCollection<string> GetConvertir(ObservableCollection<string> gcodeDrill, int ind)
         {
             gcodeLaser = new ObservableCollection<string>();
             string str = "";
@@ -33,8 +29,13 @@ namespace DrillToLight.Services
                 debut++;
             }
 
+            if (ind != -1 && ind < fin)
+            {
+                debut = ind + 1;
+            }
+
             // Mise en du Gcode
-            for (int i = debut-1; i < fin; i++)
+            for (int i = debut - 1; i < fin; i++)
             {
                 // Remplace tous les Fxx par F150. Les F sur les lignes avec Z seront de toutes façons supprimés par la suite
                 if (gcodeDrill[i].Contains('F'))

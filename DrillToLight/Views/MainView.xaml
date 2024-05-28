@@ -12,7 +12,7 @@
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
-        <conv:ColorConverter x:Key="Couleur"/>        
+        <conv:ColorConverter x:Key="Couleur"/>
     </Window.Resources>
 
     <Grid Margin="10">
@@ -43,10 +43,13 @@
             </StackPanel>
 
             <!-- Affichage du gcode original-->
-                <ListBox Grid.Row="2" Grid.Column="0"  x:Name="lstFichier" 
-                         ItemsSource="{Binding GcodeOriginal}">
-                  
-                </ListBox>
+            <ListBox Grid.Row="2" Grid.Column="0"  x:Name="lstFichier" 
+                         ItemsSource="{Binding GcodeOriginal}"
+                        SelectedItem="{Binding SelectedStartLine}"
+                     SelectedIndex="{Binding IndexStartLine}"
+                     >
+
+            </ListBox>
 
             <!-- ProgressBar -->
             <StackPanel Grid.Column="1" Grid.Row="1" Margin="10"
@@ -56,55 +59,65 @@
 
             <!-- Renseignements -->
             <StackPanel Grid.Column="1" Grid.Row="2" Margin="10,20">
+
                 <StackPanel>
-                    <TextBlock Text="G00 Z2 -> M03 S0 :" FontWeight="DemiBold"/>
-                    <TextBlock Text="Tête en haut -> Arrêt du faisceau" Margin="0,0,0,5"/>
-                    <TextBlock Text="G00 Z0 -> M03 S1000:" FontWeight="DemiBold" />
-                    <TextBlock Text="Tête en bas -> Faisceau 100%" />
+                    <TextBlock Text="G00 Z2 -&gt; M03 S0 :" FontWeight="DemiBold"/>
+                    <TextBlock Text="Tête en haut -&gt; Arrêt du faisceau" Margin="0,0,0,5"/>
+                    <TextBlock Text="G00 Z0 -&gt; M03 S1000:" FontWeight="DemiBold" />
+                    <TextBlock Text="Tête en bas -&gt; Faisceau 100%" />
+                    <TextBlock Text="Paramètre sérigraphie simple face" Margin="0,20,0,0" FontWeight="Bold" Foreground="Blue"/>
+                    <TextBlock Text="F150 : vitesse par défaut"/>
+                    <TextBlock Text="S100 : Puissance par défaut"/>
                 </StackPanel>
 
-                <StackPanel Background="Beige" Margin="0,40">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.ColumnSpan="2" Grid.Row="0">
-                            <TextBlock Text="Ajustement" HorizontalAlignment="Center" FontWeight="Bold" FontSize="14"/>
-                        </StackPanel>
-                        <StackPanel Grid.Column="0" Grid.Row="1">
-                            <TextBlock Text="Valeur actuelle" HorizontalAlignment="Center"/>
-                            <TextBlock Text="{Binding PowerCurrent,StringFormat='S{0}'}" Foreground="Red" HorizontalAlignment="Center"/>
-                            <TextBlock Text="{Binding SpeedCurrent,StringFormat='F{0}'}" Foreground="Blue" HorizontalAlignment="Center"/>
-                        </StackPanel>
-                        <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center">
-                            <TextBlock Text="Nouvelle valeur" HorizontalAlignment="Center"/>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="S : " FontWeight="Bold"/>
-                                <TextBox Text="{Binding PowerNew}"  Width="80"/>
+                    <StackPanel Background="Beige" Margin="0,20">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.ColumnSpan="2" Grid.Row="0">
+                                <TextBlock Text="Ajustement" HorizontalAlignment="Center" FontWeight="Bold" FontSize="14"/>
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="F : " FontWeight="Bold"/>
-                                <TextBox Text="{Binding SpeedNew}" Width="80"/>
+                            <StackPanel Grid.Column="0" Grid.Row="1">
+                                <TextBlock Text="Valeur actuelle" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding PowerCurrent, StringFormat=S{0}}" Foreground="Red" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding SpeedCurrent, StringFormat=F{0}}" Foreground="Blue" HorizontalAlignment="Center"/>
                             </StackPanel>
-                        </StackPanel>
-                        <StackPanel Grid.ColumnSpan="2" Grid.Row="2" Margin="0,20">
-                            <Button Content="Valider" Command="{Binding ModificationCodeCommand}" Width="100" Style="{StaticResource btnStyle}" />
-                        </StackPanel>
-                    </Grid>
-                </StackPanel>
-                
-                <StackPanel >
-                    <TextBlock Text="Paramètre sérigraphie simple face" Margin="5" FontWeight="Bold"/>
-                    <TextBlock Text="F150 : vitesse par défaut" Margin="5,0"/>
-                    <TextBlock Text="S100 : Puissance par défaut" Margin="5,0"/>
-                </StackPanel>
+                            <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center">
+                                <TextBlock Text="Nouvelle valeur" HorizontalAlignment="Center"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="S : " FontWeight="Bold"/>
+                                    <TextBox Text="{Binding PowerNew}"  Width="80"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="F : " FontWeight="Bold"/>
+                                    <TextBox Text="{Binding SpeedNew}" Width="80"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Grid.ColumnSpan="2" Grid.Row="2" Margin="0,20">
+                                <Button Content="Valider" Command="{Binding ModificationCodeCommand}" Width="100" Style="{StaticResource btnStyle}" />
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+
+
+                <Border BorderBrush="Black" BorderThickness="1">
+                    <StackPanel >
+                        <TextBlock Text="Sélection du point d'entrée" Margin="5" FontWeight="Bold" HorizontalAlignment="Center"/>
+                        <TextBlock Margin="5,0" Text="{Binding SelectedStartLine,StringFormat=Code : {0}}"/>
+                        <TextBlock Text="{Binding IndexStartLine,StringFormat=Ligne : {0:D}}" Margin="5,0"/>
+                        <Button Content="Valider le point d'entrée" Margin="0,15" Command="{Binding PointEntreeCommand}" Width="160" Height="20" Style="{StaticResource btnStyle}" />
+                    </StackPanel>
+                </Border>
             </StackPanel>
+
+
 
             <!-- Bouton enregistrement -->
             <StackPanel Grid.Column="3" Grid.Row="0">
@@ -119,15 +132,15 @@
             </StackPanel>
 
             <!-- Affichage du gcode modifié -->
-                <ListBox Grid.Row="2" Grid.Column="2" ItemsSource="{Binding GcodeModif}" >
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock Text="{Binding}" Foreground="{Binding Converter={StaticResource Couleur}}" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+            <ListBox Grid.Row="2" Grid.Column="2" ItemsSource="{Binding GcodeModif}" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding}" Foreground="{Binding Converter={StaticResource Couleur}}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
 
     </Grid>

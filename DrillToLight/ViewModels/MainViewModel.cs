@@ -5,6 +5,7 @@ namespace DrillToLight.ViewModels
 {
     internal partial class MainViewModel : ObservableObject
     {
+        // Version
         [ObservableProperty]
         private string version;
 
@@ -13,7 +14,7 @@ namespace DrillToLight.ViewModels
         [NotifyCanExecuteChangedFor(nameof(ModificationCodeCommand))]
         private string speedCurrent = string.Empty;
 
-        // Vitesse souhaitéé
+        // Vitesse souhaitée
         [ObservableProperty]
         private string speedNew = string.Empty;
 
@@ -41,8 +42,17 @@ namespace DrillToLight.ViewModels
         [ObservableProperty]
         ObservableCollection<string> gcodeModif;
 
+        // Affichage du tecte traitement en cours
         [ObservableProperty]
         private bool chargement;
+
+        // Ligne selectionnée comme point d'entrée
+        [ObservableProperty]
+
+        private string selectedStartLine = string.Empty;
+        // Index de la ligne selectionnée
+        [ObservableProperty]
+        private int indexStartLine;
 
         /// <summary>
         /// Commande Bouton Parcourir
@@ -55,6 +65,8 @@ namespace DrillToLight.ViewModels
             if (!string.IsNullOrEmpty(CheminFichierOriginal))
             {
                 Task tache = ExecuteParcourir();
+                SelectedStartLine = "";
+                IndexStartLine = -1;
                 Chargement = true;
             }
         }
@@ -70,11 +82,12 @@ namespace DrillToLight.ViewModels
             await Task.Run(() =>
             {
                 GcodeOriginal = _Lecture.GetGcode(CheminFichierOriginal);
-                GcodeModif = _conversion.GetConvertir(GcodeOriginal);
+                GcodeModif = _conversion.GetConvertir(GcodeOriginal, IndexStartLine);
                 Chargement = false;
             });
             PowerCurrent = "100";
             SpeedCurrent = "150";
+
             CheminNomNouveauFichier = NewFile(CheminFichierOriginal);
         }
 
@@ -120,6 +133,15 @@ namespace DrillToLight.ViewModels
             return file.Insert(file.Length - 3, "-Laser - S" + PowerCurrent + "- F" + SpeedCurrent);
         }
 
+        /// <summary>
+        /// Bouton validation du point d'entrée
+        /// </summary>
+        [RelayCommand]
+        private void PointEntree()
+        {
+            GcodeModif = _conversion.GetConvertir(GcodeOriginal, IndexStartLine);
+        }
+
         // Services
         IDialogue _dialogue;
         ILecture _Lecture;
@@ -145,7 +167,7 @@ namespace DrillToLight.ViewModels
             GcodeModif = new ObservableCollection<string>();
             _modificationCode = modificationCode;
 
-            Version = "Convertisseur de Gcode - Version du 26/05/2024";
+            Version = "Convertisseur de Gcode - Version du 28/05/2024";
         }
     }
 }
