@@ -29,6 +29,7 @@ namespace DrillToLight.Services
                 debut++;
             }
 
+            // Choix du point d'entrée si ind existe
             if (ind != -1 && ind < fin)
             {
                 debut = ind + 1;
