@@ -20,6 +20,7 @@ namespace DrillToLight.ViewModels
 
         // Puissance courante
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(ModificationCodeCommand))]
         private string powerCurrent = string.Empty;
 
         // Puissance souhaitée
