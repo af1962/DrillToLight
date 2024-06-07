@@ -5,9 +5,11 @@ namespace DrillToLight.Services
     internal class Conversion : IConversion
     {
         ObservableCollection<string>? gcodeLaser;
-        public ObservableCollection<string> GetConvertir(ObservableCollection<string> gcodeDrill, int ind)
+        ObservableCollection<string>? gcodeDrill;
+        public ObservableCollection<string> GetConvertir(ObservableCollection<string> gcodeOrigine, int ind)
         {
             gcodeLaser = new ObservableCollection<string>();
+            gcodeDrill = new ObservableCollection<string>(gcodeOrigine);
             string str = "";
             string[] tab;
             int index;

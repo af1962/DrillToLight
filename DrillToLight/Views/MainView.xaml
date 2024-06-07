@@ -121,7 +121,7 @@
                                 </StackPanel>
                             </StackPanel>
                             <StackPanel Grid.ColumnSpan="2" Grid.Row="2" Margin="0,20">
-                                <Button Content="Valider" Command="{Binding ModificationCodeCommand}" Width="100" Style="{StaticResource btnStyle}" />
+                                <Button Content="Valider" Command="{Binding ModificationCodeCommand}" Style="{StaticResource btnStyle}" />
                             </StackPanel>
                         </Grid>
                     </StackPanel>
@@ -149,6 +149,7 @@
             <StackPanel Grid.Column="3" Grid.Row="1">
                 <TextBlock Text="Déstination - Gcode Laser" Foreground="Green" FontWeight="Bold" TextDecorations="Underline" />
                 <TextBlock Text="{Binding CheminNomNouveauFichier}" />
+                <TextBlock Text="{Binding GcodeModif.Count,StringFormat=Ligne : {0}}"/>
             </StackPanel>
 
             <!-- Affichage du gcode modifié -->
