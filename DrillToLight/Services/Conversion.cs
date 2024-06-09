@@ -55,13 +55,13 @@ namespace DrillToLight.Services
                 {
                     if (gcodeDrill[i].Contains("Z0"))
                     {
-                        gcodeLaser.Add("G0 Z0 M03 S100");
+                        gcodeLaser.Add("S100");
                     }
                     else
                     {
                         if (!gcodeDrill[i].Contains('-'))
                         {
-                            gcodeLaser.Add("G0 Z0 M03 S0");
+                            gcodeLaser.Add("S0");
                         }
                     }
                 }
@@ -73,7 +73,7 @@ namespace DrillToLight.Services
             }
 
             // Arrêt du laser à la fin
-            gcodeLaser.Add("M03 S0");
+            gcodeLaser.Add("S0");
 
             return gcodeLaser;
         }

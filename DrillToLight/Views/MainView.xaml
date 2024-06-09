@@ -81,10 +81,10 @@
             <StackPanel Grid.Column="1" Grid.Row="2" Margin="10,20">
 
                 <StackPanel>
-                    <TextBlock Text="G00 Z2 -&gt; M03 S0 :" FontWeight="DemiBold"/>
+                    <TextBlock Text="G00 Z2 -&gt; S0" FontWeight="DemiBold"/>
                     <TextBlock Text="Tête en haut -&gt; Arrêt du faisceau" Margin="0,0,0,5"/>
-                    <TextBlock Text="G00 Z0 -&gt; M03 S1000:" FontWeight="DemiBold" />
-                    <TextBlock Text="Tête en bas -&gt; Faisceau 100%" />
+                    <TextBlock Text="G00 Z0 -&gt; S100" FontWeight="DemiBold" />
+                    <TextBlock Text="Tête en bas -&gt; Faisceau 10%" />
                     <TextBlock Text="Paramètre sérigraphie simple face" Margin="0,20,0,0" FontWeight="Bold" Foreground="Blue"/>
                     <TextBlock Text="F150 : vitesse par défaut"/>
                     <TextBlock Text="S100 : Puissance par défaut"/>
