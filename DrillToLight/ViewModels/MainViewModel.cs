@@ -29,6 +29,7 @@ namespace DrillToLight.ViewModels
 
         // Chemin du nouveau fichier
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(EnregistrementCommand))]
         private string cheminNomNouveauFichier = string.Empty;
 
         // Chemin du fichier original
@@ -49,8 +50,9 @@ namespace DrillToLight.ViewModels
 
         // Ligne selectionnée comme point d'entrée
         [ObservableProperty]
-
+        [NotifyCanExecuteChangedFor(nameof(PointEntreeCommand))]
         private string selectedStartLine = string.Empty;
+
         // Index de la ligne selectionnée
         [ObservableProperty]
         private int indexStartLine;
@@ -118,11 +120,20 @@ namespace DrillToLight.ViewModels
         /// <summary>
         /// Commande Bouton Enregistrer
         /// </summary>
-        [RelayCommand]
+        [RelayCommand(CanExecute =nameof(CanExecuteEnregistrement))]
         private void Enregistrement()
         {
             _enregistrement.Sauvegarde(GcodeModif, CheminNomNouveauFichier);
             _dialogue.ShowMessage("Enregistrement", "Fichier modifié enregistré");
+        }
+
+        /// <summary>
+        /// CaneExecute del'enregistrement
+        /// </summary>
+        /// <returns></returns>
+        public bool CanExecuteEnregistrement()
+        {
+            return !string.IsNullOrEmpty(CheminNomNouveauFichier);
         }
 
         /// <summary>
@@ -137,11 +148,22 @@ namespace DrillToLight.ViewModels
         /// <summary>
         /// Bouton validation du point d'entrée
         /// </summary>
-        [RelayCommand]
+        [RelayCommand(CanExecute = nameof(CanExecutePointEntree))]
         private void PointEntree()
         {
             GcodeModif = _conversion.GetConvertir(GcodeOriginal, IndexStartLine);
         }
+
+        /// <summary>
+        /// CanExecute point d'entrée
+        /// </summary>
+        /// <returns></returns>
+        public bool CanExecutePointEntree()
+        {
+            return !string.IsNullOrEmpty(SelectedStartLine);
+        }
+
+      
 
         // Services
         IDialogue _dialogue;

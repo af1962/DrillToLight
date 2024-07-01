@@ -62,13 +62,12 @@
             </StackPanel>
 
             <!-- Affichage du gcode original-->
-            <ListBox Grid.Row="2" Grid.Column="0"  x:Name="lstFichier" 
-                         ItemsSource="{Binding GcodeOriginal}"
-                        SelectedItem="{Binding SelectedStartLine}"
+            <ListBox Grid.Row="2" Grid.Column="0"  x:Name="lstFichier"
+                     ItemsSource="{Binding GcodeOriginal}"
+                     SelectedItem="{Binding SelectedStartLine}"
                      SelectedIndex="{Binding IndexStartLine}"
                      ItemContainerStyle="{DynamicResource _ListBoxItemStyle}"
                      >
-
             </ListBox>
 
             <!-- ProgressBar -->
@@ -121,7 +120,7 @@
                                 </StackPanel>
                             </StackPanel>
                             <StackPanel Grid.ColumnSpan="2" Grid.Row="2" Margin="0,20">
-                                <Button Content="Valider" Command="{Binding ModificationCodeCommand}" Style="{StaticResource btnStyle}" />
+                                <Button Content="Valider" Width="100" Command="{Binding ModificationCodeCommand}" Style="{StaticResource btnStyle}" />
                             </StackPanel>
                         </Grid>
                     </StackPanel>

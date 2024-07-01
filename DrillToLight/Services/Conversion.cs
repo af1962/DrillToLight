@@ -55,13 +55,13 @@ namespace DrillToLight.Services
                 {
                     if (gcodeDrill[i].Contains("Z0"))
                     {
-                        gcodeLaser.Add("S100");
+                        gcodeLaser.Add("G00 Z0 S100");
                     }
                     else
                     {
                         if (!gcodeDrill[i].Contains('-'))
                         {
-                            gcodeLaser.Add("S0");
+                            gcodeLaser.Add("G00 Z0 S0");
                         }
                     }
                 }
