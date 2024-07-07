@@ -13,6 +13,7 @@
 
     <Window.Resources>
         <conv:ColorConverter x:Key="Couleur"/>
+        <conv:GrasConverter x:Key="Gras"/>
 
         <!-- Couleur de la ligne sélectionnée-->
         <Style x:Key="_ListBoxItemStyle" TargetType="ListBoxItem">
@@ -56,7 +57,7 @@
 
             <!-- Chemin du fichier original -->
             <StackPanel Grid.Column="0" Grid.Row="1">
-                <TextBlock Text="Source Coppercam - Gcode fraisage" Foreground="Red" FontWeight="Bold" TextDecorations="Underline"/>
+                <TextBlock Text="Source Coppercam - Gcode fraisage" Foreground="Red" FontWeight="Bold"  TextDecorations="Underline"/>
                 <TextBlock Text="{Binding CheminFichierOriginal}" />
                 <TextBlock Text="{Binding GcodeOriginal.Count,StringFormat='Lignes : {0:D}'}"/>
             </StackPanel>
@@ -156,7 +157,15 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <TextBlock Text="{Binding}" Foreground="{Binding Converter={StaticResource Couleur}}" />
+                            <TextBlock Text="{Binding}" x:Name="Gcode">
+                                <TextBlock.FontWeight>
+                                    <Binding ElementName="Gcode" Path="Text" Converter="{StaticResource Gras}"/>
+                                </TextBlock.FontWeight>
+                                <TextBlock.Foreground>
+                                    <Binding ElementName="Gcode" Path="Text" Converter="{StaticResource Couleur}"/>
+                                </TextBlock.Foreground>
+                            </TextBlock>
+
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
